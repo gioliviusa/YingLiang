@@ -270,44 +270,107 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 24px;
+            align-items: stretch;
         }
         .development-card {
             background: var(--card-bg);
             border-radius: 20px;
             padding: 20px;
             border: 1px solid var(--border);
-            transition: 0.2s;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 8px 22px rgba(14, 26, 48, 0.06);
         }
         .development-card:hover {
             border-color: var(--brand-deep);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 30px rgba(14, 26, 48, 0.12);
         }
         .development-card.expandable {
             cursor: pointer;
+        }
+        .featured-project {
+            border-color: rgba(23,79,141,0.35);
+            background: linear-gradient(180deg, #ffffff, #f8fbff);
+        }
+        .development-header {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .development-header > span:first-child {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.45rem;
+            background: #eef4fc;
+            flex: 0 0 auto;
+        }
+        .development-header h4 {
+            font-size: 1.08rem;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .development-header p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.35;
+        }
+        .developer-badge {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 6px;
+            background: #eef4fc;
+            color: var(--brand-deep);
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2px;
         }
         .project-actions {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
-            margin-top: 8px;
+            margin-top: 10px;
         }
         .project-mini-btn {
             border: 1px solid var(--border);
             background: #fff;
             color: var(--text);
             border-radius: 999px;
-            padding: 6px 12px;
+            padding: 7px 12px;
             font-size: 0.8rem;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.18s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
         .project-mini-btn:hover {
             border-color: var(--brand-deep);
             color: var(--brand-deep);
+            background: #f4f8fd;
+            transform: translateY(-1px);
+        }
+        .project-mini-btn:focus-visible {
+            outline: 2px solid var(--brand-deep);
+            outline-offset: 2px;
         }
         .project-details {
             margin-top: 8px;
             font-size: 0.9rem;
             line-height: 1.35;
+            background: #f7faff;
+            border: 1px solid #e5edf7;
+            border-radius: 12px;
+            padding: 10px 12px;
         }
         .video-thumb {
             background: linear-gradient(145deg, #d9e2ef, #cbd6e4);
@@ -348,7 +411,7 @@
         .image-strip {
             display: flex;
             gap: 8px;
-            margin-top: 12px;
+            margin-top: 2px;
         }
         .image-thumb {
             background: #E5E7EB;
@@ -366,6 +429,10 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 0.25s ease;
+        }
+        .image-thumb:hover img {
+            transform: scale(1.04);
         }
 
         /* sales scroll */
@@ -579,6 +646,13 @@
                 border-radius: 20px;
                 padding: 10px 14px;
             }
+            .project-actions {
+                gap: 6px;
+            }
+            .project-mini-btn {
+                flex: 1 1 calc(50% - 6px);
+                min-width: 128px;
+            }
             .desktop-float {
                 display: none;
             }
@@ -742,8 +816,8 @@
 <div class="section">
     <h2 class="section-title">Projects by Macken Realty / Macken Realty 项目</h2>
     <div class="developments-grid">
-        <div id="projectCardOne" class="development-card">
-            <div class="development-header" style="display:flex; gap:12px; align-items:center;">
+        <div id="projectCardOne" class="development-card featured-project">
+            <div class="development-header">
                 <span style="font-size:2rem;">🏗️</span>
                 <div>
                     <h4>Unit 9 - Koya Bay</h4>
