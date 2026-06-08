@@ -107,6 +107,13 @@
             margin: 0 auto 20px;
             box-shadow: 0 15px 30px -10px rgba(23,79,141,0.3);
             transition: transform 0.2s;
+            overflow: hidden;
+        }
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
         .profile-pic:hover { transform: scale(1.02); }
         .hero h1 {
@@ -583,7 +590,7 @@
 <!-- HEADER COMPLETELY REMOVED -->
 
 <section class="hero">
-    <div class="profile-pic">YL</div>
+    <div class="profile-pic"><img src="profile/IMG_2771.JPG" alt="Ying Liang profile photo"></div>
     <h1>Ying Liang <span>Realtor Associate at Macken Realty</span><span class="zh">Macken Realty 地产经纪人</span></h1>
     <!-- License number added below name -->
     <div class="license-number">📜 Florida Real Estate License #SL3641074</div>
