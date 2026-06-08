@@ -284,6 +284,31 @@
         .development-card.expandable {
             cursor: pointer;
         }
+        .project-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+        .project-mini-btn {
+            border: 1px solid var(--border);
+            background: #fff;
+            color: var(--text);
+            border-radius: 999px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .project-mini-btn:hover {
+            border-color: var(--brand-deep);
+            color: var(--brand-deep);
+        }
+        .project-details {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            line-height: 1.35;
+        }
         .video-thumb {
             background: linear-gradient(145deg, #d9e2ef, #cbd6e4);
             border-radius: 16px;
@@ -545,7 +570,9 @@
                 flex: 1;
                 border: 1px solid #ccc;
                 text-align: center;
-                padding:         background: white;
+                padding: 12px;
+                border-radius: 50px;
+                background: white;
                 color: var(--text);
             }
             .location-badge {
@@ -715,7 +742,32 @@
 <div class="section">
     <h2 class="section-title">Projects by Macken Realty / Macken Realty 项目</h2>
     <div class="developments-grid">
-        <div id="projectCardOne" class="development-card expandable"><div class="development-header" style="display:flex; gap:12px; align-items:center;"><span style="font-size:2rem;">🏗️</span><div><h4>The Ocean Residences</h4><p>Luxury waterfront condos in Fort Lauderdale</p><span class="developer-badge" style="background:#eef2ff; padding:2px 8px; border-radius:20px;">Macken Realty</span></div></div><div class="video-thumb"><video controls preload="metadata" poster="unit%209/Stills-10.jpg"><source src="unit%209/Video.m4v" type="video/mp4">Your browser does not support the video tag.</video></div><div class="image-strip"><div class="image-thumb"><img src="unit%209/Stills-4.jpg" alt="Ocean Residences still 1"></div><div class="image-thumb"><img src="unit%209/Stills-14.jpg" alt="Ocean Residences still 2"></div><div class="image-thumb"><img src="unit%209/Stills-85.jpg" alt="Ocean Residences still 3"></div></div></div>
+        <div id="projectCardOne" class="development-card">
+            <div class="development-header" style="display:flex; gap:12px; align-items:center;">
+                <span style="font-size:2rem;">🏗️</span>
+                <div>
+                    <h4>Unit 9 - Koya Bay</h4>
+                    <p>New waterfront townhome in gated Eastern Shores.</p>
+                    <div class="project-actions">
+                        <button id="toggleProjectOneDetails" class="project-mini-btn" type="button">View details / 展开详情</button>
+                        <button id="openProjectOneMedia" class="project-mini-btn" type="button">Open media / 打开媒体</button>
+                    </div>
+                    <div id="projectOneDetails" class="project-details" hidden>
+                        <ul style="margin:8px 0 6px 18px;">
+                            <li>4,627-5,133 SF | 4 BD | 4.5 BA + flex/study</li>
+                            <li>Rooftop terrace: AC lounge, jacuzzi, summer kitchen</li>
+                            <li>Elevator, impact windows, Wolf appliances</li>
+                            <li>Boat slip with water/electricity - direct ocean access</li>
+                            <li>24/7 police-guarded community</li>
+                        </ul>
+                        <p style="font-style:italic; font-size:0.88rem;">Unit 9 offers unmatched privacy and prestige.</p>
+                    </div>
+                    <span class="developer-badge" style="background:#eef2ff; padding:2px 8px; border-radius:20px;">Macken Realty</span>
+                </div>
+            </div>
+            <div class="video-thumb"><video controls preload="metadata" poster="unit%209/Stills-10.jpg"><source src="unit%209/Video.m4v" type="video/mp4">Your browser does not support the video tag.</video></div>
+            <div class="image-strip"><div class="image-thumb"><img src="unit%209/Stills-4.jpg" alt="Unit 9 still 1"></div><div class="image-thumb"><img src="unit%209/Stills-14.jpg" alt="Unit 9 still 2"></div><div class="image-thumb"><img src="unit%209/Stills-85.jpg" alt="Unit 9 still 3"></div></div>
+        </div>
         <div class="development-card"><div class="development-header" style="display:flex; gap:12px;"><span style="font-size:2rem;">🌴</span><div><h4>Palm Grove Estates</h4><p>Gated community, Delray Beach</p><span class="developer-badge">Macken Realty</span></div></div><div class="video-thumb"><div class="play-icon"></div></div><div class="image-strip"><div class="image-thumb">🖼️</div><div class="image-thumb">🖼️</div><div class="image-thumb">🖼️</div></div></div>
         <div class="development-card"><div class="development-header" style="display:flex; gap:12px;"><span style="font-size:2rem;">🏙️</span><div><h4>District One</h4><p>Mixed-use in Miami Arts District</p><span class="developer-badge">Macken Realty</span></div></div><div class="video-thumb"><div class="play-icon"></div></div><div class="image-strip"><div class="image-thumb">🖼️</div><div class="image-thumb">🖼️</div><div class="image-thumb">🖼️</div></div></div>
         <div class="development-card"><div class="development-header" style="display:flex; gap:12px;"><span style="font-size:2rem;">⛵</span><div><h4>Harbour Villas</h4><p>Canal-front townhomes, Boca Raton</p><span class="developer-badge">Macken Realty</span></div></div><div class="video-thumb"><div class="play-icon"></div></div><div class="image-strip"><div class="image-thumb">🖼️</div><div class="image-thumb">🖼️</div><div class="image-thumb">🖼️</div></div></div>
@@ -865,6 +917,8 @@
             el.placeholder = language === 'zh' ? el.dataset.placeholderZh : el.dataset.placeholderEn;
         });
 
+        updateProjectOneToggleLabel();
+
         localStorage.setItem('preferredLanguage', language);
     }
 
@@ -881,6 +935,21 @@
     const mediaModal = document.getElementById('mediaModal');
     const mediaStage = document.getElementById('mediaStage');
     const mediaCounter = document.getElementById('mediaCounter');
+    const projectOneDetails = document.getElementById('projectOneDetails');
+    const toggleProjectOneDetails = document.getElementById('toggleProjectOneDetails');
+
+    function updateProjectOneToggleLabel() {
+        if (!toggleProjectOneDetails) {
+            return;
+        }
+        const expanded = projectOneDetails && !projectOneDetails.hidden;
+        const isZh = document.body.classList.contains('lang-zh');
+        if (expanded) {
+            toggleProjectOneDetails.textContent = isZh ? '收起详情' : 'Hide details';
+        } else {
+            toggleProjectOneDetails.textContent = isZh ? '展开详情' : 'View details';
+        }
+    }
 
     function renderMediaSlide(index) {
         currentMediaIndex = (index + projectMedia.length) % projectMedia.length;
@@ -943,7 +1012,14 @@
     document.getElementById('langEn')?.addEventListener('click', () => setLanguage('en'));
     document.getElementById('langZh')?.addEventListener('click', () => setLanguage('zh'));
 
-    document.getElementById('projectCardOne')?.addEventListener('click', () => openMediaModal(0));
+    document.getElementById('openProjectOneMedia')?.addEventListener('click', () => openMediaModal(0));
+    toggleProjectOneDetails?.addEventListener('click', () => {
+        if (!projectOneDetails) {
+            return;
+        }
+        projectOneDetails.hidden = !projectOneDetails.hidden;
+        updateProjectOneToggleLabel();
+    });
     document.getElementById('mediaClose')?.addEventListener('click', closeMediaModal);
     document.getElementById('mediaPrev')?.addEventListener('click', () => renderMediaSlide(currentMediaIndex - 1));
     document.getElementById('mediaNext')?.addEventListener('click', () => renderMediaSlide(currentMediaIndex + 1));
