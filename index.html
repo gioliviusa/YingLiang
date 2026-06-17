@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -143,6 +144,118 @@
             box-shadow: var(--shadow-sm);
             z-index: 130;
             backdrop-filter: blur(8px);
+        }
+        .accessibility-toggle {
+            position: fixed;
+            top: 74px;
+            right: 20px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--text);
+            border-radius: 999px;
+            width: 42px;
+            height: 42px;
+            padding: 0;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            z-index: 130;
+            backdrop-filter: blur(8px);
+        }
+        .accessibility-toggle[aria-pressed="true"] {
+            background: var(--brand-deep);
+            color: #fff;
+            border-color: var(--brand-deep);
+        }
+        body.a11y-mode {
+            --bg: #ffffff;
+            --card-bg: #ffffff;
+            --text: #0b1b2b;
+            --text-secondary: #22384f;
+            --accent: #08111f;
+            --brand-deep: #063a8a;
+            --brand-light: #2157b5;
+            --border: #7f93ad;
+            --border-hover: #56708b;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
+            --shadow-md: 0 10px 24px rgba(0,0,0,0.14);
+            font-family: 'Lexend', 'Inter', system-ui, -apple-system, sans-serif;
+            font-size: 1.06rem;
+            line-height: 1.7;
+        }
+        body.a11y-mode a {
+            text-decoration: underline;
+            text-underline-offset: 0.18em;
+        }
+        body.a11y-mode .hero h1,
+        body.a11y-mode .section-title,
+        body.a11y-mode .valuation-block h3,
+        body.a11y-mode .footer,
+        body.a11y-mode .nav-brand {
+            letter-spacing: 0.01em;
+        }
+        body.a11y-mode .hero h1 {
+            font-size: 2.6rem;
+        }
+        body.a11y-mode .hero h1 span {
+            font-size: 1.15rem;
+        }
+        body.a11y-mode .section-title {
+            font-size: 2rem;
+        }
+        body.a11y-mode .service-card,
+        body.a11y-mode .development-card,
+        body.a11y-mode .contact-card,
+        body.a11y-mode .valuation-block,
+        body.a11y-mode .sale-card,
+        body.a11y-mode .project-details,
+        body.a11y-mode .site-nav,
+        body.a11y-mode .mobile-bar,
+        body.a11y-mode .nav-links {
+            background: #fff;
+        }
+        body.a11y-mode .btn-dark,
+        body.a11y-mode .btn-outline,
+        body.a11y-mode .btn-light,
+        body.a11y-mode .btn-submit,
+        body.a11y-mode .project-mini-btn,
+        body.a11y-mode .mobile-bar .btn-secondary,
+        body.a11y-mode .mobile-bar .btn-call,
+        body.a11y-mode .menu-toggle,
+        body.a11y-mode .lang-btn,
+        body.a11y-mode .accessibility-toggle {
+            box-shadow: none;
+        }
+        body.a11y-mode :focus-visible {
+            outline: 3px solid #0b5fff;
+            outline-offset: 3px;
+        }
+        body.a11y-mode .service-card,
+        body.a11y-mode .development-card,
+        body.a11y-mode .contact-card,
+        body.a11y-mode .valuation-block,
+        body.a11y-mode .sale-card,
+        body.a11y-mode .project-details,
+        body.a11y-mode .site-nav,
+        body.a11y-mode .mobile-bar {
+            border-color: var(--border);
+        }
+        body.a11y-mode .service-card:hover,
+        body.a11y-mode .development-card:hover,
+        body.a11y-mode .btn-dark:hover,
+        body.a11y-mode .btn-submit:hover,
+        body.a11y-mode .btn-light:hover,
+        body.a11y-mode .project-mini-btn:hover {
+            transform: none;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
         .lang-btn {
             border: none;
@@ -923,6 +1036,13 @@
                 top: 72px;
                 left: 12px;
             }
+            .accessibility-toggle {
+                top: 72px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
             .footer {
                 padding: 22px 0 calc(96px + env(safe-area-inset-bottom));
                 margin-top: 14px;
@@ -935,6 +1055,44 @@
             }
             .site-nav {
                 max-width: 1100px;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
+            }
+            .lang-toggle {
+                border-radius: 999px;
+            }
+            .accessibility-toggle {
+                border-radius: 999px;
+            }
+            .btn-dark,
+            .btn-outline,
+            .btn-light,
+            .btn-submit,
+            .project-mini-btn,
+            .menu-toggle {
+                border-radius: 18px;
+            }
+            .service-card,
+            .development-card,
+            .contact-card,
+            .valuation-block,
+            .sale-card {
+                border-radius: 24px;
+            }
+            .project-details,
+            .video-thumb,
+            .video-thumb video,
+            .video-thumb iframe,
+            .image-thumb,
+            .mobile-bar {
+                border-radius: 20px;
+            }
+            .location-badge,
+            .license-number,
+            .project-address.featured-address,
+            .developer-badge,
+            .quick-spec {
+                border-radius: 999px;
             }
             .services-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -1062,6 +1220,8 @@
     <button type="button" id="langEn" class="lang-btn active">English</button>
     <button type="button" id="langZh" class="lang-btn">中文</button>
 </div>
+
+<button type="button" id="accessibilityToggle" class="accessibility-toggle" aria-pressed="false" aria-label="Toggle accessibility mode" title="Accessibility mode">◉</button>
 
 <!-- HEADER COMPLETELY REMOVED -->
 
@@ -1257,10 +1417,10 @@
 <div class="valuation-block">
     <h3>What's Your Home Worth?<span class="zh" style="color:#dbeafe;">您的房产现在值多少钱？</span></h3>
     <p style="opacity:0.9; max-width:340px; margin:0 auto;">Free, no-obligation market report within 24 hours.<span class="zh" style="color:#dbeafe;">24小时内提供免费、无义务房产估价报告。</span></p>
-    <form id="valuationForm" class="valuation-form">
-        <input type="text" id="valName" placeholder="Full Name / 姓名" required>
-        <input type="email" id="valEmail" placeholder="Email Address / 电子邮箱" required>
-        <input type="text" id="valAddress" placeholder="Property Address / 房产地址" required>
+    <form id="valuationForm" class="valuation-form" action="https://formspree.io/f/mojzzpnn" method="POST">
+        <input type="text" id="valName" name="name" placeholder="Full Name / 姓名" required>
+        <input type="email" id="valEmail" name="email" placeholder="Email Address / 电子邮箱" required>
+        <input type="text" id="valAddress" name="property_address" placeholder="Property Address / 房产地址" required>
         <button type="submit" class="btn-light">Get My Valuation / 获取估价 →</button>
     </form>
 </div>
@@ -1270,16 +1430,16 @@
 <div class="section" id="contact">
     <h2 class="section-title">Get In Touch / 联系我</h2>
     <div class="contact-card">
-        <form id="contactForm">
+        <form id="contactForm" action="https://formspree.io/f/mojzzpnn" method="POST">
             <div class="form-row">
-                <div class="form-group"><label>Full Name * / 姓名 *</label><input type="text" id="fullName" required></div>
-                <div class="form-group"><label>Email * / 邮箱 *</label><input type="email" id="emailContact" required></div>
+                <div class="form-group"><label>Full Name * / 姓名 *</label><input type="text" id="fullName" name="name" required></div>
+                <div class="form-group"><label>Email * / 邮箱 *</label><input type="email" id="emailContact" name="email" required></div>
             </div>
             <div class="form-row">
-                <div class="form-group"><label>Phone / 电话</label><input type="tel" id="phoneContact"></div>
-                <div class="form-group"><label>Interest / 咨询类型</label><select id="interestSelect"><option>Residential Buying / 住宅购买</option><option>Residential Selling / 住宅出售</option><option>Commercial / 商业地产</option><option>Rent / Leasing / 租赁</option><option>Other / 其他</option></select></div>
+                <div class="form-group"><label>Phone / 电话</label><input type="tel" id="phoneContact" name="phone"></div>
+                <div class="form-group"><label>Interest / 咨询类型</label><select id="interestSelect" name="interest"><option>Residential Buying / 住宅购买</option><option>Residential Selling / 住宅出售</option><option>Commercial / 商业地产</option><option>Rent / Leasing / 租赁</option><option>Other / 其他</option></select></div>
             </div>
-            <div class="form-group"><label>Message / 留言内容</label><textarea rows="3" id="messageText" placeholder="Tell me about your plans... / 请告诉我您的需求..."></textarea></div>
+            <div class="form-group"><label>Message / 留言内容</label><textarea rows="3" id="messageText" name="message" placeholder="Tell me about your plans... / 请告诉我您的需求..."></textarea></div>
             <button type="submit" class="btn-submit">Send Inquiry / 提交咨询 →</button>
         </form>
         <div class="direct-email">
@@ -1531,11 +1691,50 @@
         setTimeout(() => toast.remove(), 3000);
     }
 
+    async function submitFormToFormspree(form, data) {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json'
+            },
+            body: data
+        });
+
+        if (!response.ok) {
+            let errorMessage = 'Something went wrong. Please try again.';
+            try {
+                const result = await response.json();
+                if (result?.errors?.length) {
+                    errorMessage = result.errors[0]?.message || errorMessage;
+                }
+            } catch (error) {
+                // Keep default message.
+            }
+            throw new Error(errorMessage);
+        }
+    }
+
     wrapEnglishTextNodesForZhMode();
     prepareBilingualElements();
 
     const savedLanguage = localStorage.getItem('preferredLanguage') === 'zh' ? 'zh' : 'en';
     setLanguage(savedLanguage);
+
+    const accessibilityToggle = document.getElementById('accessibilityToggle');
+    const savedAccessibilityMode = localStorage.getItem('accessibilityMode') === 'on';
+
+    function setAccessibilityMode(enabled) {
+        document.body.classList.toggle('a11y-mode', enabled);
+        accessibilityToggle?.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+        accessibilityToggle && (accessibilityToggle.title = enabled ? 'Accessibility mode on' : 'Accessibility mode off');
+        localStorage.setItem('accessibilityMode', enabled ? 'on' : 'off');
+    }
+
+    setAccessibilityMode(savedAccessibilityMode);
+
+    accessibilityToggle?.addEventListener('click', () => {
+        setAccessibilityMode(!document.body.classList.contains('a11y-mode'));
+    });
 
     function setMobileMenuOpenState(isOpen) {
         if (!primaryMenu || !menuToggle) {
@@ -1644,8 +1843,18 @@
                 showToast('📧 Please enter a valid email address. / 请输入有效邮箱地址。');
                 return;
             }
-            showToast('✅ Valuation request sent! Ying will contact you within 24h. / 估价请求已发送，我们将在24小时内联系您。');
-            valuationForm.reset();
+            const formData = new FormData(valuationForm);
+            formData.append('_subject', 'Home Valuation Request');
+            formData.append('_replyto', email);
+
+            submitFormToFormspree(valuationForm, formData)
+                .then(() => {
+                    showToast('✅ Valuation request sent! Ying will contact you within 24h. / 估价请求已发送，我们将在24小时内联系您。');
+                    valuationForm.reset();
+                })
+                .catch((error) => {
+                    showToast(`❌ ${error.message}`);
+                });
         });
     }
 
@@ -1669,8 +1878,18 @@
                 showToast('💬 Please write a short message so Ying can assist you better. / 请留言说明需求，便于更好协助您。');
                 return;
             }
-            showToast('✨ Message sent! Ying will respond shortly via email or phone. / 留言已发送，我们将尽快通过电话或邮箱回复您。');
-            contactForm.reset();
+            const formData = new FormData(contactForm);
+            formData.append('_subject', 'New Contact Inquiry');
+            formData.append('_replyto', email);
+
+            submitFormToFormspree(contactForm, formData)
+                .then(() => {
+                    showToast('✨ Message sent! Ying will respond shortly via email or phone. / 留言已发送，我们将尽快通过电话或邮箱回复您。');
+                    contactForm.reset();
+                })
+                .catch((error) => {
+                    showToast(`❌ ${error.message}`);
+                });
         });
     }
 </script>
