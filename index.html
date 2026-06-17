@@ -760,7 +760,7 @@
             body {
                 padding: 0 20px;
                 padding-top: 96px;
-                padding-bottom: calc(92px + env(safe-area-inset-bottom));
+                padding-bottom: 0;
                 overflow-y: auto;
                 -webkit-overflow-scrolling: touch;
             }
@@ -912,7 +912,7 @@
                 left: 12px;
             }
             .footer {
-                padding: 22px 0 28px;
+                padding: 22px 0 calc(96px + env(safe-area-inset-bottom));
                 margin-top: 14px;
             }
         }
