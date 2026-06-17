@@ -43,6 +43,27 @@
             padding: 0 24px;
             padding-top: 92px;
             overflow-x: hidden;
+            position: relative;
+            isolation: isolate;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: url('recent%20sales/PoolSunset1.png') center center / cover no-repeat;
+            filter: brightness(0.92) saturate(1.0) contrast(1.06);
+            z-index: -2;
+            pointer-events: none;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(180deg, rgba(248, 247, 244, 0.68) 0%, rgba(245, 242, 237, 0.58) 42%, rgba(239, 235, 228, 0.74) 100%),
+                radial-gradient(circle at top, rgba(255, 255, 255, 0.05), transparent 42%);
+            z-index: -1;
+            pointer-events: none;
         }
         .site-nav {
             position: fixed;
