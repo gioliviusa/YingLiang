@@ -1521,6 +1521,41 @@
     const savedLanguage = localStorage.getItem('preferredLanguage') === 'zh' ? 'zh' : 'en';
     setLanguage(savedLanguage);
 
+    let edgeTouchStartY = 0;
+    let edgeTouchStartX = 0;
+    document.addEventListener('touchstart', (event) => {
+        if (window.innerWidth > 768 || event.touches.length === 0) {
+            return;
+        }
+        edgeTouchStartY = event.touches[0].clientY;
+        edgeTouchStartX = event.touches[0].clientX;
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (event) => {
+        if (window.innerWidth > 768 || event.touches.length === 0) {
+            return;
+        }
+
+        const touch = event.touches[0];
+        const deltaY = touch.clientY - edgeTouchStartY;
+        const deltaX = touch.clientX - edgeTouchStartX;
+
+        // Only guard vertical edge swipes; keep horizontal swipe areas natural.
+        if (Math.abs(deltaY) <= Math.abs(deltaX)) {
+            return;
+        }
+
+        const scrollingElement = document.scrollingElement || document.documentElement;
+        const scrollTop = scrollingElement.scrollTop;
+        const maxScroll = scrollingElement.scrollHeight - window.innerHeight;
+        const atTop = scrollTop <= 0;
+        const atBottom = scrollTop >= maxScroll - 1;
+
+        if ((atTop && deltaY > 0) || (atBottom && deltaY < 0)) {
+            event.preventDefault();
+        }
+    }, { passive: false });
+
     function setMobileMenuOpenState(isOpen) {
         if (!primaryMenu || !menuToggle) {
             return;
