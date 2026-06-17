@@ -454,6 +454,11 @@
             font-weight: 600;
             letter-spacing: 0.1px;
         }
+        .project-address.featured-address::before {
+            content: '📍';
+            font-size: 0.9rem;
+            line-height: 1;
+        }
         .project-quick-specs {
             display: flex;
             gap: 8px;
@@ -820,6 +825,9 @@
             .services-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
+            .developments-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
         }
         .toast-message {
             position: fixed;
@@ -986,7 +994,7 @@
                     <h4>Unit 9 - Koya Bay</h4>
                     <p>Private waterfront residence with dock.</p>
                     <p class="project-subtitle">New Construction · Eastern Shores, steps from Sunny Isles Beach</p>
-                    <p class="project-address">4002 NE 167 St, North Miami Beach, FL 33160</p>
+                    <p class="project-address featured-address">4002 NE 167 St, North Miami Beach, FL 33160</p>
                     <div class="project-quick-specs">
                         <span class="quick-spec">4,627 sqft</span>
                         <span class="quick-spec">4 Bedrooms</span>
@@ -1020,7 +1028,7 @@
                     <h4>Hollywood Moon - 901 South Ocean Drive Hollywood Beach FL 33019</h4>
                     <p>Luxury coastal residences in Hollywood, Florida.</p>
                     <p class="project-subtitle">Street, kitchen, balcony, aerial, and pool/ocean views</p>
-                    <p class="project-address">Hollywood Beach Area, Hollywood, FL</p>
+                    <p class="project-address featured-address">Hollywood Beach Area, Hollywood, FL</p>
                     <div class="project-quick-specs">
                         <span class="quick-spec">Waterfront Lifestyle</span>
                         <span class="quick-spec">Resort Amenities</span>
@@ -1065,7 +1073,7 @@
                     <h4>Bungalow East</h4>
                     <p>Coastal living brochure and fact sheet.</p>
                     <p class="project-subtitle">Boutique coastal residences with modern seaside appeal</p>
-                    <p class="project-address featured-address">📍 530 North Birch Road, Ft. Lauderdale, FL 33304</p>
+                    <p class="project-address featured-address">530 North Birch Road, Ft. Lauderdale, FL 33304</p>
                     <div class="project-quick-specs">
                         <span class="quick-spec">Coastal Living</span>
                         <span class="quick-spec">Boutique Concept</span>
