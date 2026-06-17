@@ -52,6 +52,9 @@
             position: relative;
             isolation: isolate;
         }
+        .mobile-content {
+            position: relative;
+        }
         body::before {
             content: '';
             position: fixed;
@@ -757,12 +760,21 @@
         }
 
         @media (max-width: 768px) {
+            html,
             body {
-                padding: 0 20px;
-                padding-top: 96px;
-                padding-bottom: 0;
+                height: 100%;
+                overflow: hidden;
+            }
+            body {
+                padding: 0;
+            }
+            .mobile-content {
+                height: 100vh;
+                height: 100dvh;
                 overflow-y: auto;
+                overscroll-behavior-y: none;
                 -webkit-overflow-scrolling: touch;
+                padding: 96px 20px calc(96px + env(safe-area-inset-bottom));
             }
             .site-nav {
                 top: 8px;
@@ -1053,6 +1065,8 @@
 
 <!-- HEADER COMPLETELY REMOVED -->
 
+<div class="mobile-content">
+
 <section class="hero" id="top">
     <div class="profile-pic"><img src="profile/IMG_2771.JPG" alt="Ying Liang profile photo"></div>
     <h1>Ying Liang <span>Realtor Associate at Macken Realty</span></h1>
@@ -1282,6 +1296,8 @@
     <p><a href="https://mackenrealty.com" target="_blank">MACKENREALTY.COM</a> | Hollywood · Davie ·  Ft.Lauderdale · Pembroke Pines</p>
     <p style="margin-top:12px;">© 2026 Ying Liang | Florida Real Estate License #SL3641074 | All rights reserved.<span class="zh">版权所有</span></p>
 </footer>
+
+</div>
 
 <div class="mobile-bar">
     <a href="tel:+17542308702" class="btn-call">📞 Call / 致电</a>
@@ -1520,41 +1536,6 @@
 
     const savedLanguage = localStorage.getItem('preferredLanguage') === 'zh' ? 'zh' : 'en';
     setLanguage(savedLanguage);
-
-    let edgeTouchStartY = 0;
-    let edgeTouchStartX = 0;
-    document.addEventListener('touchstart', (event) => {
-        if (window.innerWidth > 768 || event.touches.length === 0) {
-            return;
-        }
-        edgeTouchStartY = event.touches[0].clientY;
-        edgeTouchStartX = event.touches[0].clientX;
-    }, { passive: true });
-
-    document.addEventListener('touchmove', (event) => {
-        if (window.innerWidth > 768 || event.touches.length === 0) {
-            return;
-        }
-
-        const touch = event.touches[0];
-        const deltaY = touch.clientY - edgeTouchStartY;
-        const deltaX = touch.clientX - edgeTouchStartX;
-
-        // Only guard vertical edge swipes; keep horizontal swipe areas natural.
-        if (Math.abs(deltaY) <= Math.abs(deltaX)) {
-            return;
-        }
-
-        const scrollingElement = document.scrollingElement || document.documentElement;
-        const scrollTop = scrollingElement.scrollTop;
-        const maxScroll = scrollingElement.scrollHeight - window.innerHeight;
-        const atTop = scrollTop <= 0;
-        const atBottom = scrollTop >= maxScroll - 1;
-
-        if ((atTop && deltaY > 0) || (atBottom && deltaY < 0)) {
-            event.preventDefault();
-        }
-    }, { passive: false });
 
     function setMobileMenuOpenState(isOpen) {
         if (!primaryMenu || !menuToggle) {
