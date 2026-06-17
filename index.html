@@ -51,6 +51,10 @@
             position: relative;
             isolation: isolate;
         }
+        .page-shell {
+            position: relative;
+            z-index: 1;
+        }
         body::before {
             content: '';
             position: fixed;
@@ -748,9 +752,22 @@
         }
 
         @media (max-width: 768px) {
+            html,
+            body {
+                height: 100%;
+                overflow: hidden;
+            }
             body {
                 padding: 0 20px;
                 padding-top: 84px;
+            }
+            .page-shell {
+                height: 100vh;
+                height: 100dvh;
+                overflow-y: auto;
+                overscroll-behavior-y: contain;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: calc(120px + env(safe-area-inset-bottom));
             }
             .hero {
                 margin: 14px 0 28px;
@@ -972,6 +989,8 @@
     </style>
 </head>
 <body class="lang-en">
+
+<div class="page-shell">
 
 <nav class="site-nav" aria-label="Main navigation">
     <a href="#top" class="nav-brand">Ying Liang</a>
@@ -1231,6 +1250,8 @@
 <a href="tel:+17542308702" class="desktop-float" title="Call Ying">
     <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.58 1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
 </a>
+
+</div>
 
 <script>
     function splitBilingualText(text, language) {
