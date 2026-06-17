@@ -884,8 +884,26 @@
                     <h4>Hollywood Moon</h4>
                     <p>Luxury coastal residences in Hollywood, Florida.</p>
                     <p class="project-subtitle">Street, kitchen, balcony, aerial, and pool/ocean views</p>
+                    <p class="project-address">Hollywood Beach Area, Hollywood, FL</p>
+                    <div class="project-quick-specs">
+                        <span class="quick-spec">Waterfront Lifestyle</span>
+                        <span class="quick-spec">Resort Amenities</span>
+                        <span class="quick-spec">Modern Interiors</span>
+                    </div>
                     <div class="project-actions">
+                        <button id="toggleProjectTwoDetails" class="project-mini-btn" type="button">View details / 展开详情</button>
+                        <button id="openProjectTwoMedia" class="project-mini-btn" type="button">Open media / 打开媒体</button>
                         <a href="Hollywood%20moon/Hollywood%20Moon%20_%20Digital%20Fact%20Sheet%20(English)%20REMAX.pdf" target="_blank" rel="noopener noreferrer" class="project-mini-btn">Brochure / 宣传册</a>
+                    </div>
+                    <div id="projectTwoDetails" class="project-details" hidden>
+                        <ul style="margin:8px 0 6px 18px;">
+                            <li>Luxury residential concept near the Hollywood coastline</li>
+                            <li>Designed for indoor-outdoor living with private balconies</li>
+                            <li>Resort-inspired atmosphere with pool and ocean-facing views</li>
+                            <li>Contemporary kitchens, open layouts, and bright natural light</li>
+                            <li>Ideal for full-time residence or seasonal coastal living</li>
+                        </ul>
+                        <p style="font-style:italic; font-size:0.88rem;">Hollywood Moon blends coastal calm with modern design.</p>
                     </div>
                     <span class="developer-badge">Macken Realty</span>
                 </div>
@@ -1055,11 +1073,20 @@
         });
 
         updateProjectOneToggleLabel();
+        updateProjectTwoToggleLabel();
 
         localStorage.setItem('preferredLanguage', language);
     }
 
-    const projectMedia = [
+    const projectOneMedia = [
+        { type: 'video', src: 'https://app.box.com/index.php?rm=box_download_shared_file&shared_name=lhyy51tx18mkktl2nt3pubnqkmyqsjqp&file_id=f_2019381285537', poster: 'unit%209/Stills-10.jpg' },
+        { type: 'image', src: 'unit%209/Stills-4.jpg', alt: 'Unit 9 still 1' },
+        { type: 'image', src: 'unit%209/Stills-14.jpg', alt: 'Unit 9 still 2' },
+        { type: 'image', src: 'unit%209/Stills-85.jpg', alt: 'Unit 9 still 3' },
+        { type: 'image', src: 'unit%209/IMG_6904.PNG', alt: 'Unit 9 flyer image' }
+    ];
+
+    const projectTwoMedia = [
         { type: 'video', src: 'Hollywood%20moon/VIDEO-English%20Unbranded%202026-03-25-18-56-46.mp4', poster: 'Hollywood%20moon/BINYAN_HOL3231_HollywoodMoon_S010_EXT_Street_Final3500.jpg' },
         { type: 'image', src: 'Hollywood%20moon/BINYAN_HOL3231_HollywoodMoon_S010_EXT_Street_Final3500.jpg', alt: 'Hollywood Moon street view' },
         { type: 'image', src: 'Hollywood%20moon/BINYAN_HOL3231_HollywoodMoon_S110_INT_Kitchen_Unit612_FINAL3500.jpg', alt: 'Hollywood Moon kitchen view' },
@@ -1067,6 +1094,7 @@
         { type: 'image', src: 'Hollywood%20moon/MOON_AERIAL-3_FINAL.jpg', alt: 'Hollywood Moon aerial view' },
         { type: 'image', src: 'Hollywood%20moon/MOON_Pool-Ocean_Ocean_Daytime_Final.jpg', alt: 'Hollywood Moon pool and ocean view' }
     ];
+    let activeMediaSet = projectTwoMedia;
     let currentMediaIndex = 0;
 
     const mediaModal = document.getElementById('mediaModal');
@@ -1074,6 +1102,8 @@
     const mediaCounter = document.getElementById('mediaCounter');
     const projectOneDetails = document.getElementById('projectOneDetails');
     const toggleProjectOneDetails = document.getElementById('toggleProjectOneDetails');
+    const projectTwoDetails = document.getElementById('projectTwoDetails');
+    const toggleProjectTwoDetails = document.getElementById('toggleProjectTwoDetails');
 
     function updateProjectOneToggleLabel() {
         if (!toggleProjectOneDetails) {
@@ -1088,9 +1118,25 @@
         }
     }
 
+    function updateProjectTwoToggleLabel() {
+        if (!toggleProjectTwoDetails) {
+            return;
+        }
+        const expanded = projectTwoDetails && !projectTwoDetails.hidden;
+        const isZh = document.body.classList.contains('lang-zh');
+        if (expanded) {
+            toggleProjectTwoDetails.textContent = isZh ? '收起详情' : 'Hide details';
+        } else {
+            toggleProjectTwoDetails.textContent = isZh ? '展开详情' : 'View details';
+        }
+    }
+
     function renderMediaSlide(index) {
-        currentMediaIndex = (index + projectMedia.length) % projectMedia.length;
-        const item = projectMedia[currentMediaIndex];
+        if (!activeMediaSet.length) {
+            return;
+        }
+        currentMediaIndex = (index + activeMediaSet.length) % activeMediaSet.length;
+        const item = activeMediaSet[currentMediaIndex];
         mediaStage.innerHTML = '';
 
         if (item.type === 'video') {
@@ -1114,10 +1160,11 @@
             mediaStage.appendChild(img);
         }
 
-        mediaCounter.textContent = (currentMediaIndex + 1) + ' / ' + projectMedia.length;
+        mediaCounter.textContent = (currentMediaIndex + 1) + ' / ' + activeMediaSet.length;
     }
 
-    function openMediaModal(startIndex = 0) {
+    function openMediaModal(mediaSet, startIndex = 0) {
+        activeMediaSet = Array.isArray(mediaSet) && mediaSet.length ? mediaSet : projectTwoMedia;
         mediaModal.classList.add('open');
         mediaModal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
@@ -1149,13 +1196,21 @@
     document.getElementById('langEn')?.addEventListener('click', () => setLanguage('en'));
     document.getElementById('langZh')?.addEventListener('click', () => setLanguage('zh'));
 
-    document.getElementById('openProjectOneMedia')?.addEventListener('click', () => openMediaModal(0));
+    document.getElementById('openProjectOneMedia')?.addEventListener('click', () => openMediaModal(projectOneMedia, 0));
+    document.getElementById('openProjectTwoMedia')?.addEventListener('click', () => openMediaModal(projectTwoMedia, 0));
     toggleProjectOneDetails?.addEventListener('click', () => {
         if (!projectOneDetails) {
             return;
         }
         projectOneDetails.hidden = !projectOneDetails.hidden;
         updateProjectOneToggleLabel();
+    });
+    toggleProjectTwoDetails?.addEventListener('click', () => {
+        if (!projectTwoDetails) {
+            return;
+        }
+        projectTwoDetails.hidden = !projectTwoDetails.hidden;
+        updateProjectTwoToggleLabel();
     });
     document.getElementById('mediaClose')?.addEventListener('click', closeMediaModal);
     document.getElementById('mediaPrev')?.addEventListener('click', () => renderMediaSlide(currentMediaIndex - 1));
