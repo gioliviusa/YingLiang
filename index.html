@@ -52,10 +52,6 @@
             position: relative;
             isolation: isolate;
         }
-        .page-shell {
-            position: relative;
-            z-index: 1;
-        }
         body::before {
             content: '';
             position: fixed;
@@ -761,27 +757,23 @@
         }
 
         @media (max-width: 768px) {
-            html,
-            body {
-                height: 100%;
-                overflow: hidden;
-            }
             body {
                 padding: 0 20px;
-                padding-top: 84px;
-            }
-            .page-shell {
-                height: 100vh;
-                height: 100dvh;
+                padding-top: 96px;
+                padding-bottom: calc(92px + env(safe-area-inset-bottom));
                 overflow-y: auto;
-                overscroll-behavior-y: contain;
                 -webkit-overflow-scrolling: touch;
-                padding-bottom: calc(48px + env(safe-area-inset-bottom));
             }
             .site-nav {
+                top: 8px;
+                left: 8px;
+                right: 8px;
+                max-width: none;
                 border-bottom-left-radius: 14px;
                 border-bottom-right-radius: 14px;
+                border-radius: 16px;
                 box-shadow: 0 8px 20px rgba(16, 24, 40, 0.08);
+                padding: 10px 12px;
             }
             .hero {
                 margin: 14px 0 28px;
@@ -792,10 +784,6 @@
             .stats-row {
                 margin: 22px 0;
                 gap: 24px;
-            }
-            .site-nav {
-                max-width: 100%;
-                padding: 10px 16px;
             }
             .menu-toggle {
                 display: inline-flex;
@@ -808,7 +796,7 @@
                 border: 1px solid var(--border);
                 border-radius: 18px;
                 box-shadow: var(--shadow-md);
-                width: min(300px, calc(100vw - 32px));
+                width: min(300px, calc(100vw - 36px));
                 min-width: 0;
                 padding: 10px;
                 display: none;
@@ -845,8 +833,8 @@
                 display: flex;
                 position: fixed;
                 bottom: 0;
-                left: 8px;
-                right: 8px;
+                left: 10px;
+                right: 10px;
                 background: white;
                 padding: 12px 20px;
                 padding-bottom: calc(12px + env(safe-area-inset-bottom));
@@ -858,7 +846,7 @@
                 border-top-right-radius: 18px;
                 box-shadow: 0 -10px 24px rgba(16, 24, 40, 0.1);
                 z-index: 100;
-                max-width: calc(100% - 16px);
+                max-width: none;
             }
             .mobile-bar .btn-call {
                 flex: 2;
@@ -920,7 +908,7 @@
                 display: none;
             }
             .lang-toggle {
-                top: 68px;
+                top: 60px;
                 left: 12px;
             }
             .footer {
@@ -1045,8 +1033,6 @@
     </style>
 </head>
 <body class="lang-en">
-
-<div class="page-shell">
 
 <nav class="site-nav" aria-label="Main navigation">
     <a href="#top" class="nav-brand">Ying Liang</a>
@@ -1306,8 +1292,6 @@
 <a href="tel:+17542308702" class="desktop-float" title="Call Ying">
     <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.58 1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
 </a>
-
-</div>
 
 <script>
     function splitBilingualText(text, language) {
