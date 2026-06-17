@@ -1460,6 +1460,32 @@
     const savedLanguage = localStorage.getItem('preferredLanguage') === 'zh' ? 'zh' : 'en';
     setLanguage(savedLanguage);
 
+    let touchStartY = 0;
+    document.addEventListener('touchstart', (event) => {
+        if (window.innerWidth <= 768 && event.touches.length > 0) {
+            touchStartY = event.touches[0].clientY;
+        }
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (event) => {
+        if (window.innerWidth > 768 || event.touches.length === 0) {
+            return;
+        }
+
+        const currentY = event.touches[0].clientY;
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight;
+        const viewportHeight = window.innerHeight;
+        const atTop = scrollTop <= 0;
+        const atBottom = scrollTop + viewportHeight >= scrollHeight - 1;
+        const swipingDown = currentY > touchStartY;
+        const swipingUp = currentY < touchStartY;
+
+        if ((atTop && swipingDown) || (atBottom && swipingUp)) {
+            event.preventDefault();
+        }
+    }, { passive: false });
+
     function setMobileMenuOpenState(isOpen) {
         if (!primaryMenu || !menuToggle) {
             return;
