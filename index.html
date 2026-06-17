@@ -417,6 +417,13 @@
             object-fit: cover;
             background: #000;
         }
+        .video-thumb iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 16px;
+            background: #000;
+        }
         .play-icon {
             background: white;
             width: 52px;
@@ -922,7 +929,40 @@
                 <div class="image-thumb"><img src="Hollywood%20moon/MOON_Pool-Ocean_Ocean_Daytime_Final.jpg" alt="Hollywood Moon pool and ocean view"></div>
             </div>
         </div>
-        <div class="development-card"><div class="development-header" style="display:flex; gap:12px;"><span style="font-size:2rem;">🏙️</span><div><h4>District One</h4><p>Mixed-use in Miami Arts District</p><span class="developer-badge">Macken Realty</span></div></div><div class="video-thumb"><div class="play-icon"></div></div><div class="image-strip"><div class="image-thumb">🖼️</div><div class="image-thumb">🖼️</div><div class="image-thumb">🖼️</div></div></div>
+        <div class="development-card">
+            <div class="development-header" style="display:flex; gap:12px;">
+                <span style="font-size:2rem;">🏡</span>
+                <div>
+                    <h4>Bungalow East</h4>
+                    <p>Coastal living brochure and fact sheet.</p>
+                    <p class="project-subtitle">Boutique coastal residences with modern seaside appeal</p>
+                    <p class="project-address">East Fort Lauderdale / Coastal Broward County</p>
+                    <div class="project-quick-specs">
+                        <span class="quick-spec">Coastal Living</span>
+                        <span class="quick-spec">Boutique Concept</span>
+                        <span class="quick-spec">Modern Design</span>
+                    </div>
+                    <div class="project-actions">
+                        <button id="toggleProjectThreeDetails" class="project-mini-btn" type="button">View details / 展开详情</button>
+                        <a href="Bungalow/Bungalow%20East%20Fact%20Sheet.pdf" target="_blank" rel="noopener noreferrer" class="project-mini-btn">Brochure / 宣传册</a>
+                    </div>
+                    <div id="projectThreeDetails" class="project-details" hidden>
+                        <ul style="margin:8px 0 6px 18px;">
+                            <li>Coastal-focused presentation with a modern lifestyle feel</li>
+                            <li>Designed to highlight relaxed living and clean architectural lines</li>
+                            <li>Great for buyers seeking a polished beach-area concept</li>
+                            <li>Fact sheet and video work together to tell the project story</li>
+                        </ul>
+                        <p style="font-style:italic; font-size:0.88rem;">Bungalow East brings together lifestyle, location, and design.</p>
+                    </div>
+                    <span class="developer-badge">Macken Realty</span>
+                </div>
+            </div>
+            <div class="video-thumb">
+                <iframe src="https://www.youtube.com/embed/7h5UkJVuBho" title="Bungalow East video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="image-strip"><div class="image-thumb">🖼️</div><div class="image-thumb">🖼️</div><div class="image-thumb">🖼️</div></div>
+        </div>
         <div class="development-card"><div class="development-header" style="display:flex; gap:12px;"><span style="font-size:2rem;">⛵</span><div><h4>Harbour Villas</h4><p>Canal-front townhomes, Boca Raton</p><span class="developer-badge">Macken Realty</span></div></div><div class="video-thumb"><div class="play-icon"></div></div><div class="image-strip"><div class="image-thumb">🖼️</div><div class="image-thumb">🖼️</div><div class="image-thumb">🖼️</div></div></div>
     </div>
 </div>
@@ -1074,6 +1114,7 @@
 
         updateProjectOneToggleLabel();
         updateProjectTwoToggleLabel();
+        updateProjectThreeToggleLabel();
 
         localStorage.setItem('preferredLanguage', language);
     }
@@ -1104,6 +1145,8 @@
     const toggleProjectOneDetails = document.getElementById('toggleProjectOneDetails');
     const projectTwoDetails = document.getElementById('projectTwoDetails');
     const toggleProjectTwoDetails = document.getElementById('toggleProjectTwoDetails');
+    const projectThreeDetails = document.getElementById('projectThreeDetails');
+    const toggleProjectThreeDetails = document.getElementById('toggleProjectThreeDetails');
 
     function updateProjectOneToggleLabel() {
         if (!toggleProjectOneDetails) {
@@ -1128,6 +1171,19 @@
             toggleProjectTwoDetails.textContent = isZh ? '收起详情' : 'Hide details';
         } else {
             toggleProjectTwoDetails.textContent = isZh ? '展开详情' : 'View details';
+        }
+    }
+
+    function updateProjectThreeToggleLabel() {
+        if (!toggleProjectThreeDetails) {
+            return;
+        }
+        const expanded = projectThreeDetails && !projectThreeDetails.hidden;
+        const isZh = document.body.classList.contains('lang-zh');
+        if (expanded) {
+            toggleProjectThreeDetails.textContent = isZh ? '收起详情' : 'Hide details';
+        } else {
+            toggleProjectThreeDetails.textContent = isZh ? '展开详情' : 'View details';
         }
     }
 
@@ -1211,6 +1267,13 @@
         }
         projectTwoDetails.hidden = !projectTwoDetails.hidden;
         updateProjectTwoToggleLabel();
+    });
+    toggleProjectThreeDetails?.addEventListener('click', () => {
+        if (!projectThreeDetails) {
+            return;
+        }
+        projectThreeDetails.hidden = !projectThreeDetails.hidden;
+        updateProjectThreeToggleLabel();
     });
     document.getElementById('mediaClose')?.addEventListener('click', closeMediaModal);
     document.getElementById('mediaPrev')?.addEventListener('click', () => renderMediaSlide(currentMediaIndex - 1));

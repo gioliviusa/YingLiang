@@ -1,3 +1,4 @@
 {
-    "editor.linkedEditing": true
+    "editor.linkedEditing": true,
+    "workbench.editorLargeFileConfirmation": 50
 }
