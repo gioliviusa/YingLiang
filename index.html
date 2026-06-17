@@ -12,6 +12,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         html {
@@ -164,6 +165,14 @@
             text-decoration: none;
             color: inherit;
             transition: color 0.2s, opacity 0.2s;
+            touch-action: manipulation;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            touch-action: manipulation;
         }
 
         a:hover {
@@ -769,6 +778,11 @@
                 -webkit-overflow-scrolling: touch;
                 padding-bottom: calc(48px + env(safe-area-inset-bottom));
             }
+            .site-nav {
+                border-bottom-left-radius: 14px;
+                border-bottom-right-radius: 14px;
+                box-shadow: 0 8px 20px rgba(16, 24, 40, 0.08);
+            }
             .hero {
                 margin: 14px 0 28px;
             }
@@ -789,27 +803,37 @@
             .nav-links {
                 position: absolute;
                 top: calc(100% + 8px);
-                right: 16px;
+                right: 0;
                 background: #fff;
                 border: 1px solid var(--border);
-                border-radius: 14px;
+                border-radius: 18px;
                 box-shadow: var(--shadow-md);
-                min-width: 220px;
-                padding: 8px;
+                width: min(300px, calc(100vw - 32px));
+                min-width: 0;
+                padding: 10px;
                 display: none;
                 flex-direction: column;
                 align-items: stretch;
-                gap: 2px;
+                gap: 4px;
             }
             .nav-links a {
-                padding: 10px 12px;
-                border-radius: 10px;
+                padding: 12px 14px;
+                border-radius: 12px;
+                font-size: 0.95rem;
             }
             .nav-links a:hover {
                 background: rgba(23,79,141,0.08);
             }
+            .nav-links a:active {
+                background: rgba(23,79,141,0.14);
+            }
             .nav-links.open {
                 display: flex;
+            }
+            .menu-toggle {
+                width: 44px;
+                height: 44px;
+                border-radius: 14px;
             }
             .hero h1 {
                 font-size: 1.8rem;
@@ -821,15 +845,20 @@
                 display: flex;
                 position: fixed;
                 bottom: 0;
-                left: 0;
-                right: 0;
+                left: 8px;
+                right: 8px;
                 background: white;
                 padding: 12px 20px;
                 padding-bottom: calc(12px + env(safe-area-inset-bottom));
                 gap: 12px;
                 border-top: 1px solid var(--border);
+                border: 1px solid var(--border);
+                border-bottom: none;
+                border-top-left-radius: 18px;
+                border-top-right-radius: 18px;
+                box-shadow: 0 -10px 24px rgba(16, 24, 40, 0.1);
                 z-index: 100;
-                max-width: 100%;
+                max-width: calc(100% - 16px);
             }
             .mobile-bar .btn-call {
                 flex: 2;
@@ -837,7 +866,7 @@
                 color: white;
                 text-align: center;
                 padding: 12px;
-                border-radius: 50px;
+                border-radius: 14px;
                 font-weight: 600;
             }
             .mobile-bar .btn-secondary {
@@ -845,9 +874,12 @@
                 border: 1px solid #ccc;
                 text-align: center;
                 padding: 12px;
-                border-radius: 50px;
+                border-radius: 14px;
                 background: white;
                 color: var(--text);
+            }
+            .mobile-bar a:active {
+                transform: scale(0.98);
             }
             .location-badge {
                 border-radius: 20px;
@@ -859,12 +891,36 @@
             .project-mini-btn {
                 flex: 1 1 calc(50% - 6px);
                 min-width: 128px;
+                min-height: 42px;
+            }
+            .project-mini-btn:active,
+            .btn-dark:active,
+            .btn-outline:active,
+            .btn-light:active,
+            .btn-submit:active {
+                transform: scale(0.98);
+            }
+            .service-card,
+            .development-card,
+            .contact-card,
+            .valuation-block,
+            .sale-card {
+                border-radius: 18px;
+            }
+            .service-card:hover,
+            .development-card:hover,
+            .btn-dark:hover,
+            .btn-submit:hover,
+            .btn-light:hover,
+            .project-mini-btn:hover {
+                transform: none;
+                box-shadow: none;
             }
             .desktop-float {
                 display: none;
             }
             .lang-toggle {
-                top: 64px;
+                top: 68px;
                 left: 12px;
             }
             .footer {
@@ -1480,32 +1536,6 @@
 
     const savedLanguage = localStorage.getItem('preferredLanguage') === 'zh' ? 'zh' : 'en';
     setLanguage(savedLanguage);
-
-    let touchStartY = 0;
-    document.addEventListener('touchstart', (event) => {
-        if (window.innerWidth <= 768 && event.touches.length > 0) {
-            touchStartY = event.touches[0].clientY;
-        }
-    }, { passive: true });
-
-    document.addEventListener('touchmove', (event) => {
-        if (window.innerWidth > 768 || event.touches.length === 0) {
-            return;
-        }
-
-        const currentY = event.touches[0].clientY;
-        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight;
-        const viewportHeight = window.innerHeight;
-        const atTop = scrollTop <= 0;
-        const atBottom = scrollTop + viewportHeight >= scrollHeight - 1;
-        const swipingDown = currentY > touchStartY;
-        const swipingUp = currentY < touchStartY;
-
-        if ((atTop && swipingDown) || (atBottom && swipingUp)) {
-            event.preventDefault();
-        }
-    }, { passive: false });
 
     function setMobileMenuOpenState(isOpen) {
         if (!primaryMenu || !menuToggle) {
