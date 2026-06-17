@@ -41,12 +41,69 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
+            padding-top: 92px;
             overflow-x: hidden;
+        }
+        .site-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            z-index: 140;
+        }
+        .nav-brand {
+            font-weight: 800;
+            color: var(--brand-deep);
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            opacity: 0.92;
+        }
+        .nav-links a:hover {
+            color: var(--brand-deep);
+            opacity: 1;
+        }
+        .menu-toggle {
+            border: 1px solid var(--border);
+            background: #fff;
+            color: var(--text);
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            font-size: 1.25rem;
+            line-height: 1;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .menu-toggle[aria-expanded="true"] {
+            border-color: var(--brand-deep);
+            color: var(--brand-deep);
         }
         .lang-toggle {
             position: fixed;
-            top: 16px;
-            right: 20px;
+            top: 74px;
+            left: 20px;
             background: rgba(255, 255, 255, 0.92);
             border: 1px solid var(--border);
             border-radius: 999px;
@@ -54,7 +111,7 @@
             display: inline-flex;
             gap: 4px;
             box-shadow: var(--shadow-sm);
-            z-index: 120;
+            z-index: 130;
             backdrop-filter: blur(8px);
         }
         .lang-btn {
@@ -649,6 +706,39 @@
         @media (max-width: 768px) {
             body {
                 padding: 0 20px;
+                padding-top: 84px;
+            }
+            .site-nav {
+                max-width: 100%;
+                padding: 10px 16px;
+            }
+            .menu-toggle {
+                display: inline-flex;
+            }
+            .nav-links {
+                position: absolute;
+                top: calc(100% + 8px);
+                right: 16px;
+                background: #fff;
+                border: 1px solid var(--border);
+                border-radius: 14px;
+                box-shadow: var(--shadow-md);
+                min-width: 220px;
+                padding: 8px;
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 2px;
+            }
+            .nav-links a {
+                padding: 10px 12px;
+                border-radius: 10px;
+            }
+            .nav-links a:hover {
+                background: rgba(23,79,141,0.08);
+            }
+            .nav-links.open {
+                display: flex;
             }
             .hero h1 {
                 font-size: 1.8rem;
@@ -702,13 +792,16 @@
                 display: none;
             }
             .lang-toggle {
-                top: 10px;
-                right: 12px;
+                top: 64px;
+                left: 12px;
             }
         }
 
         @media (min-width: 1024px) {
             body {
+                max-width: 1100px;
+            }
+            .site-nav {
                 max-width: 1100px;
             }
             .services-grid {
@@ -818,6 +911,18 @@
 </head>
 <body class="lang-en">
 
+<nav class="site-nav" aria-label="Main navigation">
+    <a href="#top" class="nav-brand">Ying Liang</a>
+    <button type="button" id="menuToggle" class="menu-toggle" aria-label="Toggle menu" aria-controls="primaryMenu" aria-expanded="false">☰</button>
+    <div id="primaryMenu" class="nav-links">
+        <a href="#top">Home / 首页</a>
+        <a href="#services">Services / 服务</a>
+        <a href="#projects">Projects / 项目</a>
+        <a href="#recent-sales">Recent Sales / 近期成交</a>
+        <a href="#contact">Contact / 联系</a>
+    </div>
+</nav>
+
 <div class="lang-toggle" aria-label="Language switcher">
     <button type="button" id="langEn" class="lang-btn active">English</button>
     <button type="button" id="langZh" class="lang-btn">中文</button>
@@ -825,7 +930,7 @@
 
 <!-- HEADER COMPLETELY REMOVED -->
 
-<section class="hero">
+<section class="hero" id="top">
     <div class="profile-pic"><img src="profile/IMG_2771.JPG" alt="Ying Liang profile photo"></div>
     <h1>Ying Liang <span>Realtor Associate at Macken Realty</span></h1>
     <!-- License number added below name -->
@@ -846,7 +951,7 @@
     <div class="stat-item"><div class="stat-value">98%</div><div class="stat-label">Client Satisfaction<span class="zh">客户满意度</span></div></div>
 </div>
 
-<div class="section">
+<div class="section" id="services">
     <h2 class="section-title">What I Offer / 服务项目</h2>
     <div class="services-grid">
         <div class="service-card"><span class="service-icon">💰</span><h4>Residential Selling<span class="zh">住宅出售</span></h4><p>Strategic marketing that gets top dollar<span class="zh">制定精准营销策略，争取最佳售价</span></p></div>
@@ -858,7 +963,7 @@
     </div>
 </div>
 
-<div class="section">
+<div class="section" id="projects">
     <h2 class="section-title">Projects by Macken Realty / Macken Realty 项目</h2>
     <div class="developments-grid">
         <div id="projectCardOne" class="development-card featured-project">
@@ -1005,7 +1110,7 @@
     </div>
 </div>
 
-<div class="section">
+<div class="section" id="recent-sales">
     <h2 class="section-title">Recent Sales / 近期成交</h2>
     <div class="sales-scroll">
         <div class="sale-card"><div class="sale-img"><img src="recent%20sales/Living.png" alt="Recent sale living room interior"><span class="sale-badge">SOLD</span></div><div class="sale-info" style="padding:14px;"><div class="sale-price">$1,250,000</div><div class="sale-address">Coral Gables, FL</div><div style="display:flex; gap:8px; font-size:0.7rem;">4 bd · 3 ba · 2,800 sqft</div></div></div>
@@ -1176,6 +1281,8 @@
     const mediaModal = document.getElementById('mediaModal');
     const mediaStage = document.getElementById('mediaStage');
     const mediaCounter = document.getElementById('mediaCounter');
+    const menuToggle = document.getElementById('menuToggle');
+    const primaryMenu = document.getElementById('primaryMenu');
     const projectOneDetails = document.getElementById('projectOneDetails');
     const toggleProjectOneDetails = document.getElementById('toggleProjectOneDetails');
     const projectTwoDetails = document.getElementById('projectTwoDetails');
@@ -1292,6 +1399,45 @@
 
     const savedLanguage = localStorage.getItem('preferredLanguage') === 'zh' ? 'zh' : 'en';
     setLanguage(savedLanguage);
+
+    function setMobileMenuOpenState(isOpen) {
+        if (!primaryMenu || !menuToggle) {
+            return;
+        }
+        primaryMenu.classList.toggle('open', isOpen);
+        menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        menuToggle.textContent = isOpen ? '✕' : '☰';
+    }
+
+    menuToggle?.addEventListener('click', () => {
+        const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+        setMobileMenuOpenState(!isOpen);
+    });
+
+    primaryMenu?.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                setMobileMenuOpenState(false);
+            }
+        });
+    });
+
+    document.addEventListener('click', (event) => {
+        if (window.innerWidth > 768 || !primaryMenu || !menuToggle) {
+            return;
+        }
+        const clickedInsideMenu = primaryMenu.contains(event.target);
+        const clickedToggle = menuToggle.contains(event.target);
+        if (!clickedInsideMenu && !clickedToggle) {
+            setMobileMenuOpenState(false);
+        }
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            setMobileMenuOpenState(false);
+        }
+    });
 
     document.getElementById('langEn')?.addEventListener('click', () => setLanguage('en'));
     document.getElementById('langZh')?.addEventListener('click', () => setLanguage('zh'));
