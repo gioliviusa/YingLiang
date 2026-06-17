@@ -944,6 +944,7 @@
                     </div>
                     <div class="project-actions">
                         <button id="toggleProjectThreeDetails" class="project-mini-btn" type="button">View details / 展开详情</button>
+                        <button id="openProjectThreeMedia" class="project-mini-btn" type="button">Open media / 打开媒体</button>
                         <a href="Bungalow/Bungalow%20East%20Fact%20Sheet.pdf" target="_blank" rel="noopener noreferrer" class="project-mini-btn">Brochure / 宣传册</a>
                     </div>
                     <div id="projectThreeDetails" class="project-details" hidden>
@@ -961,7 +962,13 @@
             <div class="video-thumb">
                 <iframe src="https://www.youtube.com/embed/7h5UkJVuBho" title="Bungalow East video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
-            <div class="image-strip"><div class="image-thumb">🖼️</div><div class="image-thumb">🖼️</div><div class="image-thumb">🖼️</div></div>
+            <div class="image-strip">
+                <div class="image-thumb"><img src="Bungalow/IMG_3095.JPG" alt="Bungalow East exterior view"></div>
+                <div class="image-thumb"><img src="Bungalow/IMG_3096.JPG" alt="Bungalow East coastal community view"></div>
+                <div class="image-thumb"><img src="Bungalow/IMG_3097.JPG" alt="Bungalow East amenity view"></div>
+                <div class="image-thumb"><img src="Bungalow/IMG_3098.JPG" alt="Bungalow East interior lifestyle view"></div>
+                <div class="image-thumb"><img src="Bungalow/IMG_3099.JPG" alt="Bungalow East sunset lifestyle view"></div>
+            </div>
         </div>
         <div class="development-card"><div class="development-header" style="display:flex; gap:12px;"><span style="font-size:2rem;">⛵</span><div><h4>Harbour Villas</h4><p>Canal-front townhomes, Boca Raton</p><span class="developer-badge">Macken Realty</span></div></div><div class="video-thumb"><div class="play-icon"></div></div><div class="image-strip"><div class="image-thumb">🖼️</div><div class="image-thumb">🖼️</div><div class="image-thumb">🖼️</div></div></div>
     </div>
@@ -1135,6 +1142,14 @@
         { type: 'image', src: 'Hollywood%20moon/MOON_AERIAL-3_FINAL.jpg', alt: 'Hollywood Moon aerial view' },
         { type: 'image', src: 'Hollywood%20moon/MOON_Pool-Ocean_Ocean_Daytime_Final.jpg', alt: 'Hollywood Moon pool and ocean view' }
     ];
+
+    const projectThreeMedia = [
+        { type: 'image', src: 'Bungalow/IMG_3095.JPG', alt: 'Bungalow East exterior view' },
+        { type: 'image', src: 'Bungalow/IMG_3096.JPG', alt: 'Bungalow East coastal community view' },
+        { type: 'image', src: 'Bungalow/IMG_3097.JPG', alt: 'Bungalow East amenity view' },
+        { type: 'image', src: 'Bungalow/IMG_3098.JPG', alt: 'Bungalow East interior lifestyle view' },
+        { type: 'image', src: 'Bungalow/IMG_3099.JPG', alt: 'Bungalow East sunset lifestyle view' }
+    ];
     let activeMediaSet = projectTwoMedia;
     let currentMediaIndex = 0;
 
@@ -1254,6 +1269,7 @@
 
     document.getElementById('openProjectOneMedia')?.addEventListener('click', () => openMediaModal(projectOneMedia, 0));
     document.getElementById('openProjectTwoMedia')?.addEventListener('click', () => openMediaModal(projectTwoMedia, 0));
+    document.getElementById('openProjectThreeMedia')?.addEventListener('click', () => openMediaModal(projectThreeMedia, 0));
     toggleProjectOneDetails?.addEventListener('click', () => {
         if (!projectOneDetails) {
             return;
